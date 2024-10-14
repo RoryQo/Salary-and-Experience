@@ -26,9 +26,13 @@ The script requires a CSV file named `salary.csv` that should include the follow
 
 3. **Model Fitting (Untransformed)**: A linear regression model is fitted using the untransformed salary data. The model predicts salary based on years of employment, providing coefficients that indicate the expected change in salary for each additional year of experience.
 
-4. **Residual Analysis (Untransformed)**: Predicted values and jackknife residuals are calculated from the model. A residual plot is created to assess the fit of the model. In this plot, patterns may emerge that indicate non-linearity, such as a funnel shape, suggesting that the relationship between salary and years of employment is not purely linear. Additionally, heteroskedasticity may be present, where the variability of residuals increases with the level of predicted salary.
+```
+model = lm(salary ~ years, data = salary)
+```
 
-5. **Transformation**: The salary variable is transformed using a natural log transformation to address the identified issues of non-linearity and heteroskedasticity.
+5. **Residual Analysis (Untransformed)**: Predicted values and jackknife residuals are calculated from the model. A residual plot is created to assess the fit of the model. In this plot, patterns may emerge that indicate non-linearity, such as a funnel shape, suggesting that the relationship between salary and years of employment is not purely linear. Additionally, heteroskedasticity may be present, where the variability of residuals increases with the level of predicted salary.
+
+6. **Transformation**: The salary variable is transformed using a natural log transformation to address the identified issues of non-linearity and heteroskedasticity.
 
 ```
 salary$log_salary = log(salary$salary)
