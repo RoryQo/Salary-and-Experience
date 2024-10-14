@@ -40,13 +40,31 @@ salary$log_salary = log(salary$salary)
 
 7. **Scatterplot for Transformed Data**: A scatterplot is generated to visualize the relationship between years of employment and the natural log of salary, which provides a more linear relationship.
 
-8. **Model Fitting (Transformed)**: A new linear regression model is fitted using the transformed salary data to predict the natural log of salary based on years of employment. The coefficients from this model indicate the percentage change in salary for each additional year of experience.
+<br>
+<br>
+<br>
+<div style="display: flex; justify-content: space-between;">
+
+  <img src="https://github.com/RoryQo/Salary-and-Experience/raw/main/PreScatter.jpg" alt="Pre-Transformation Scatter Plot" style="width: 400px;">
+
+  <img src="https://github.com/RoryQo/Salary-and-Experience/raw/main/PostScat.jpg" alt="Post-Transformation Scatter Plot" style="width: 400px;">
+
+</div>
+
+<br>
+<br>
+<br>
+
+9. **Model Fitting (Transformed)**: A new linear regression model is fitted using the transformed salary data to predict the natural log of salary based on years of employment. The coefficients from this model indicate the percentage change in salary for each additional year of experience.
 
 ```
 tr_model = lm(log(salary) ~ years, data = salary)
 ```
 
 10. **Residual Analysis (Transformed)**: Predictions and residuals from the transformed model are calculated, and a residual plot is created to evaluate the fit. The residuals should be more evenly distributed around zero, indicating a better model fit without patterns of non-linearity or heteroskedasticity.
+<br>
+<br>
+<br>
 
 <div style="display: flex; justify-content: space-between;">
 
