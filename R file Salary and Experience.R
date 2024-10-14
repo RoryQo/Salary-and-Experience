@@ -1,0 +1,81 @@
+## ----------------------------------------------------------
+salary = read.table("salary.csv", header = TRUE, sep = ",")
+
+
+## ----------------------------------------------------------
+library(ggplot2)
+
+# Create a scatterplot
+ggplot(salary, aes(x = years, y = salary)) +
+  geom_point(shape = 21, color = "black", fill = "steelblue", size = 4, stroke = 0.5, alpha = 0.8) +  # Points with outline
+  labs(title = "Pre Transformation Salary vs. Experience",
+       x = "Years of Employment",
+       y = "Salary") +
+  ylim(0, 300000) +  # Set y-axis limits
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+
+# Fit model using untransformed salary
+model = lm(salary ~ years, data = salary)
+
+# Residual plot
+salary$pred <- predict(model)  # Make predictions
+salary$residuals <- rstudent(model)  # Calculate jackknife residuals
+
+# Create the residual plot
+ggplot(salary, aes(x = pred, y = residuals)) +
+  geom_point(shape = 21, color = "black", fill = "steelblue", size = 4, stroke = 0.5, alpha = 0.8) +  # Points with outline
+  geom_hline(yintercept = 0, color = "lightgray", size = 1) +  # Light gray horizontal line
+  geom_hline(yintercept = 0, color = "black", size = 0.5) +  # Black outline for the line
+  labs(title = "Pre Transformation Residual Plot",
+       x = "Predicted Salary",
+       y = "Jackknife Residual") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+
+## ----------------------------------------------------------
+salary$log_salary = log(salary$salary)
+
+
+## ----------------------------------------------------------
+# Scatterplot
+ggplot(salary, aes(x = years, y = log_salary)) +
+  geom_point(shape = 21, color = "black", fill = "steelblue", size = 4, stroke = 0.5, alpha = 0.8) +  # Points with outline
+  labs(title = "Post Transformation log(Salary) vs. Years of Employment",
+       x = "Years of Employment",
+       y = "Natural Log of Salary") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+# Fit model on transformed response
+tr_model = lm(log(salary) ~ years, data = salary)
+
+# Residual plot
+salary$tr_pred = predict(tr_model)  # Make predictions using transformed model
+salary$tr_residuals = rstudent(tr_model)  # Calculate jackknife residuals for transformed model
+
+ggplot(salary, aes(x = tr_pred, y = tr_residuals)) +
+  geom_point(shape = 21, color = "black", fill = "steelblue", size = 4, stroke = 0.5, alpha = 0.8) +  # Points with outline
+  geom_hline(yintercept = 0, color = "lightgray", size = 1) +  # Light gray horizontal line
+  geom_hline(yintercept = 0, color = "black", size = 0.5) +  # Black outline for the line
+  labs(title = "Post Transformation Residual Plot",
+       x = "Predicted Natural Log of Salary",
+       y = "Jackknife Residual") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+
+## ----------------------------------------------------------
+summary(tr_model)
+summary(model)
+
