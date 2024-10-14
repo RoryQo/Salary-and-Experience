@@ -48,7 +48,17 @@ tr_model = lm(log(salary) ~ years, data = salary)
 
 10. **Residual Analysis (Transformed)**: Predictions and residuals from the transformed model are calculated, and a residual plot is created to evaluate the fit. The residuals should be more evenly distributed around zero, indicating a better model fit without patterns of non-linearity or heteroskedasticity.
 
+<div style="display: flex; justify-content: space-between;">
 
+  <img src="https://github.com/RoryQo/Salary-and-Experience/raw/main/PreResid.jpg" alt="Pre-Transformation Residual Plot" style="width: 400px;">
+
+  <img src="https://github.com/RoryQo/Salary-and-Experience/raw/main/PostResid.jpg" alt="Post-Transformation Residual Plot" style="width: 400px;">
+
+</div>
+
+<br>
+<br>
+<br>
 
 11. **Model Summaries**: Summaries of both the untransformed and transformed models are generated. The outputs include:
    - **Coefficients**:
