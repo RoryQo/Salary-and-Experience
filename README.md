@@ -51,14 +51,23 @@ tr_model = lm(log(salary) ~ years, data = salary)
 
 
 11. **Model Summaries**: Summaries of both the untransformed and transformed models are generated. The outputs include:
-   - **Coefficients**: Estimates that show the relationship between the predictor and response variables.
-   - **R-squared Values**: Indicators of the proportion of variance explained by the model, with higher values suggesting better explanatory power.
-   - **P-values**: Assess the statistical significance of the coefficients, with values less than 0.05 indicating strong evidence against the null hypothesis.
+   - **Coefficients**:
+       - **Intercept**: 9.980798
+       - **Years**: 0.077595
+         - This value represents the estimated percentage change in salary for each additional year of experience. Specifically, for each additional year of employment, the salary is expected to increase by about 7.76% (since \( e^{0.077595} \approx 1.080\)).
+     - **R-squared**: 0.9244
+       - This indicates that approximately 92.44% of the variability in the natural log of salary can be explained by years of employment. This improvement suggests that the log transformation has helped in capturing the relationship more effectively than the untransformed model that captured 81% of the relationship.
+     - **P-values**:
+       - **Intercept**: < 2e-16 (highly significant)
+       - **Years**: < 2e-16 (highly significant)
 
 ## Conclusion
-The analysis reveals a clear relationship between salary and years of employment, with the initial model demonstrating potential non-linear patterns and signs of heteroskedasticity. The natural log transformation improves the fit of the model and provides more reliable estimates. The transformed model outputs indicate a statistically significant relationship, suggesting that as years of experience increase, salary also increases, both in absolute terms and on a percentage basis when using the log transformation. The residual plots confirm that the transformed model addresses the issues identified in the untransformed model, leading to a more robust analysis.
 
-Overall, this approach underscores the importance of addressing non-linearity and heteroskedasticity in regression analysis to ensure that model assumptions are met and to enhance the understanding of salary determinants. Future work could involve exploring additional variables or more complex modeling techniques to further refine the analysis.
+By applying a natural log transformation to the salary variable, these assumptions were better satisfied in the transformed model. The R-squared value increased to approximately 92.44%, indicating a substantial improvement over the 81.1% in the untransformed model.
+
+In the transformed model, the coefficient for years of employment is about 0.0776, with a standard error of approximately 0.0029. This suggests that each additional year of employment is associated with an approximate 7.6% increase in salary, and the small standard error indicates a precise estimate. The residual standard error decreased to 0.2076, reflecting tighter clustering of the residuals around the predicted values. The p-value for the years coefficient is less than 2e-16, confirming a statistically significant relationship.
+
+Overall, the log transformation enhanced the model's ability to accurately reflect the relationship between years of employment and salary, addressing issues of non-linearity and heteroskedasticity that were evident in the untransformed model.
 
 ## License
 This code is intended for educational purposes. Proper attribution is appreciated if used in any publications or presentations.
