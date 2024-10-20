@@ -1,6 +1,6 @@
 # Salary and Years of Experience Analysis
  
-## Table of Contents
+## Table of Contents 
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Data](#data)
